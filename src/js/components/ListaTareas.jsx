@@ -47,7 +47,7 @@ function ListaTareas() {
             {tareas.map((tarea, index) => (
               <li
                 key={index}>
-                {tarea}
+                <p className="m-0"> {tarea} </p>
                 <button className="boton-borrar" onClick={() => borrarTarea(index)}>x</button>
               </li>
             ))}

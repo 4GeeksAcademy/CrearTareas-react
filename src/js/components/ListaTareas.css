@@ -51,6 +51,13 @@ input{
     font-family: 'Times New Roman', Times, serif;
 }
 
+.espacio-detarea{
+    width: 100%;
+    display: flex;
+   justify-content: center;
+   align-items: center;  
+}
+
 
 ul{
     list-style: none;
@@ -69,13 +76,14 @@ li{
     border-bottom: 1px solid #eee;
 }
 
+
 .boton-borrar{
     background: none;
     border: none;
     color: red;
     font-size: 1.2rem;
     cursor: pointer;
-    opacity: 0.6;
+    opacity: 0;
 }
 
 .boton-borrar:hover{
