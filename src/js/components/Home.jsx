@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ListaTareas from './ListaTareas'
+import { crearUsuario } from "../../api/api.js";
+
+function Home() {
+
+	const [creado, setCreado] = useState(false);
+	useEffect(() => {
+		const inicio = async () => {
+			await crearUsuario();
+			setCreado(true);
+		};
+		inicio();
+	}, []);
+
+	if (!creado) return null;
 
 
-//create your first component
-const Home = () => {
 	return (
 		<div className="text-center">
 			<ListaTareas />
