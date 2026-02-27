@@ -2,14 +2,17 @@ const url = "https://playground.4geeks.com/todo";
 const usuario = "gene_fal";
 
 
-
-// Traeme las tareas del usuario, y no existe devuelves null
 export const getTareas = async () => {
     try {
         const response = await fetch(`${url}/users/${usuario}`);
-        if (response.status === 404) return null;
+        if (response.status === 404) {
+            await crearUsuario();
+            return { todos: [] };
+        }
         return await response.json();
-    } catch (error) { return null; }
+    } catch (error) {
+        return { todos: [] };
+    }
 };
 
 
@@ -17,24 +20,34 @@ export const getTareas = async () => {
 
 export const crearUsuario = async () => {
     try {
-        await fetch(`${url}/users/${usuario}`, {
+        const response = await fetch(`${url}/users/${usuario}`, {
             method: "POST",
+            body: json.stringify({}),
             headers: { "Content-Type": "application/json" }
         });
+        return response.ok;
     }
-    catch (error) { console.log("Usuario creado"); }
+    catch (error) {
+        console.error("Error al crear usuario");
+
+    }
 };
 
 
 
-//Agregar tarea. recuerda,label es una varible que recoge
+//Agregar tarea. recuerda,label es una varible
+
 export const agregarTarea = async (label) => {
     try {
         const response = await fetch(`${url}/todos/${usuario}`, {
             method: "POST",
-            body: JSON.stringify({ label, is_done: false }),
-            headers: { "Content-Type": "application/json" }
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ label, is_done: false })
         });
+        if (!response.ok) {
+            const errorDato = await response.json();
+            console.log("Erro de la Api,", errorDato);
+        }
         return response.ok;
     } catch (error) {
         return false;
