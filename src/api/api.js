@@ -22,7 +22,7 @@ export const crearUsuario = async () => {
     try {
         const response = await fetch(`${url}/users/${usuario}`, {
             method: "POST",
-            body: json.stringify({}),
+            body: JSON.stringify({}),
             headers: { "Content-Type": "application/json" }
         });
         return response.ok;
